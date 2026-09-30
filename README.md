@@ -37,7 +37,10 @@ cluttered with fields you're not using.
 
 ## Installation
 
-Clone into your ComfyUI `custom_nodes` folder and restart ComfyUI:
+**Via ComfyUI-Manager:** open Manager -> Install via Git URL -> paste
+`https://github.com/Bloodwolfb/ComfyUI-HotSwitches.git` -> restart ComfyUI.
+
+**Manually:** clone into your ComfyUI `custom_nodes` folder and restart:
 
 ```bash
 cd ComfyUI/custom_nodes
