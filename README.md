@@ -1,28 +1,38 @@
 # ComfyUI-HotSwitches
 
-Switch nodes for ComfyUI, all under the **HotComfy/Switches** category.
+I kept doing the same annoying thing in ComfyUI: wanting to try a different
+model, or a different resolution, and ending up either rewiring a tangle of
+noodles or keeping five slightly-different copies of the same workflow around
+just so I could A/B something. These two nodes exist so I could stop doing
+that. Pick from a dropdown, keep working.
 
 ## Nodes
 
 ### Hot Lazy Switch
 
-A universal switch that works with any type. Give each connected input a
-name; the `index` dropdown selects by that name, not by position, so the
-choice survives being promoted into a subgraph. Only the selected branch is
-evaluated (lazy) - unselected branches don't run.
+Plug in up to 10 things of any type - models, images, conditioning, whatever
+- give each one a name, and pick which one feeds downstream from a single
+dropdown. The unpicked branches don't just get ignored, they don't run at
+all, so you're not paying the load/compute cost for every option every time,
+only the one you're actually using.
 
-Sockets reveal progressively as you connect them, up to 10 slots. A pulled
-wire leaves a visible empty socket rather than renumbering the rest.
+Sockets show up one at a time as you connect them, so the node isn't a wall
+of ten empty inputs on day one. Unplug something and its socket stays put
+rather than shuffling everything below it around.
 
 ### Hot Resolution Mode Switch
 
-Switches between two ways of producing a width/height pair on one node:
+For when you want the convenience of an aspect-ratio + megapixel resolution
+picker most of the time, but still want to drop in exact numbers sometimes.
+One dropdown flips the node between:
 
-- **Resolution Selector** - aspect ratio + target megapixels + rounding
-  multiple, same formula as ComfyUI core's built-in Resolution Selector node.
-- **Manual Resolution** - direct width/height fields.
+- **Resolution Selector** - pick an aspect ratio and a target megapixel
+  count, it does the math (same formula as ComfyUI's own built-in Resolution
+  Selector node).
+- **Manual Resolution** - just type the width and height yourself.
 
-Only the active mechanic's widgets are shown; the `mode` dropdown swaps them.
+Only the controls for whichever mode you're in are shown, so the node isn't
+cluttered with fields you're not using.
 
 ## Installation
 

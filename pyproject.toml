@@ -1,6 +1,6 @@
 [project]
 name = "comfyui-hotswitches"
-description = "Switch nodes for ComfyUI: a universal lazy-evaluated value switch with named per-instance options, and a resolution switch that toggles between a bucketed aspect-ratio/megapixel selector and manual width/height."
+description = "Two switch nodes for ComfyUI: pick from up to 10 named inputs of any type from one dropdown (only the picked one runs), and toggle a resolution node between an aspect-ratio/megapixel picker and manual width/height."
 version = "0.1.0"
 license = {file = "LICENSE"}
 
