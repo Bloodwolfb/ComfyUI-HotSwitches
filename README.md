@@ -11,6 +11,8 @@ that. Pick from a dropdown, keep working.
 
 ### Hot Lazy Switch
 
+<img src="docs/images/hot-lazy-switch.png" alt="Hot Lazy Switch node with four named model inputs" width="500">
+
 Plug in up to 10 things of any type - models, images, conditioning, whatever
 - give each one a name, and pick which one feeds downstream from a single
 dropdown. The unpicked branches don't just get ignored, they don't run at
@@ -22,6 +24,8 @@ of ten empty inputs on day one. Unplug something and its socket stays put
 rather than shuffling everything below it around.
 
 ### Hot Resolution Mode Switch
+
+<img src="docs/images/hot-resolution-mode-switch-selector.png" alt="Hot Resolution Mode Switch in Resolution Selector mode" width="400"> <img src="docs/images/hot-resolution-mode-switch-manual.png" alt="Hot Resolution Mode Switch in Manual Resolution mode" width="400">
 
 For when you want the convenience of an aspect-ratio + megapixel resolution
 picker most of the time, but still want to drop in exact numbers sometimes.
