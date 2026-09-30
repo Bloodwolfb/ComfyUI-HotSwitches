@@ -11,7 +11,7 @@ that. Pick from a dropdown, keep working.
 
 ### Hot Lazy Switch
 
-<img src="docs/images/hot-lazy-switch.png" alt="Hot Lazy Switch node with four named model inputs" width="500">
+<img src="docs/images/hot-lazy-switch.png" alt="Hot Lazy Switch node with six named model inputs" width="420">
 
 Plug in up to 10 things of any type - models, images, conditioning, whatever
 - give each one a name, and pick which one feeds downstream from a single
@@ -22,6 +22,11 @@ only the one you're actually using.
 Sockets show up one at a time as you connect them, so the node isn't a wall
 of ten empty inputs on day one. Unplug something and its socket stays put
 rather than shuffling everything below it around.
+
+The selector is a dropdown rather than a raw index, so promoting it into a
+subgraph input still shows real names to pick from instead of a bare number:
+
+<img src="docs/images/hot-lazy-switch-subgraph.png" alt="The index selector promoted to a subgraph input, showing a filterable dropdown of real names" width="500">
 
 ### Hot Resolution Mode Switch
 
