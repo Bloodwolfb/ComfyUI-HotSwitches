@@ -69,4 +69,8 @@ a reasonably current ComfyUI build that ships that API.
 
 ## License
 
-MIT - see [LICENSE](LICENSE).
+MIT - see [LICENSE](LICENSE). Plain English version: do whatever you want
+with this - use it, modify it, ship it in something you sell - just keep
+it credited to me, Brad Girman, as the original author. That's the actual
+legal requirement (not just the license file along for the ride), it's
+just easy to miss buried in license boilerplate.
