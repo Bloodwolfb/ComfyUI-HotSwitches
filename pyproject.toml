@@ -2,13 +2,19 @@
 name = "comfyui-hotswitches"
 description = "Two switch nodes for ComfyUI: pick from up to 10 named inputs of any type from one dropdown (only the picked one runs), and toggle a resolution node between an aspect-ratio/megapixel picker and manual width/height."
 version = "0.1.0"
+readme = "README.md"
+requires-python = ">=3.10"
 license = {file = "LICENSE"}
+authors = [
+    {name = "Brad Girman"},
+]
 
 [project.urls]
 Repository = "https://github.com/Bloodwolfb/ComfyUI-HotSwitches"
+"Bug Tracker" = "https://github.com/Bloodwolfb/ComfyUI-HotSwitches/issues"
 # Used by Comfy Registry https://registry.comfy.org
 
 [tool.comfy]
-PublisherId = "141989943"
+PublisherId = "bloodwolfb"
 DisplayName = "HotSwitches"
 Icon = ""
