@@ -4,7 +4,7 @@ I kept doing the same annoying thing in ComfyUI: wanting to try a different
 model's variations or a different model altogether, or a different resolution, 
 and ending up either rewiring a tangle of
 noodles or keeping five slightly-different copies of the same workflow around
-just so I could A/B something. These two nodes exist so I could stop doing
+just so I could run A/B tests on something. These two nodes exist so I could stop doing
 that. Pick from a dropdown, keep working.
 
 ## Nodes
