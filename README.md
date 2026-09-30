@@ -30,7 +30,7 @@ Clone into your ComfyUI `custom_nodes` folder and restart ComfyUI:
 
 ```bash
 cd ComfyUI/custom_nodes
-git clone https://github.com/<your-github-username>/ComfyUI-HotSwitches.git
+git clone https://github.com/Bloodwolfb/ComfyUI-HotSwitches.git
 ```
 
 No extra Python dependencies required.
