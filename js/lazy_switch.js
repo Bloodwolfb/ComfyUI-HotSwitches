@@ -100,7 +100,14 @@ function setVisibleSockets(node, visible) {
 // Setting widget.type = "hidden" alone is not enough in this build: the
 // canvas leaves a phantom row for the last widget touched unless
 // widget.hidden is also set.
-function setHidden(widget, hidden) {
+//
+// That still isn't the whole story for a widget that also has a matching
+// entry in node.inputs (every widget does here, for "convert to input"
+// support) - collapsing the widget's row doesn't remove that socket, so it
+// stays a live drop target at a stale position (sometimes on top of a
+// visible row, sometimes floating below the node entirely). Splicing it out
+// of node.inputs while hidden, and back in on show, closes that off.
+function setHidden(node, widget, hidden) {
   if (hidden) {
     if (widget.__hotHidden) return;
     widget.__hotHidden = {
@@ -113,6 +120,12 @@ function setHidden(widget, hidden) {
     widget.hidden = true;
     widget.computeSize = () => [0, -4];
     if (widget.element) widget.element.style.display = "none";
+
+    const idx = (node.inputs ?? []).findIndex((s) => s.name === widget.name);
+    if (idx >= 0) {
+      widget.__hotHiddenSlot = node.inputs[idx];
+      node.inputs.splice(idx, 1);
+    }
   } else if (widget.__hotHidden) {
     const prev = widget.__hotHidden;
     widget.type = prev.type;
@@ -120,6 +133,11 @@ function setHidden(widget, hidden) {
     widget.computeSize = prev.computeSize;
     if (widget.element) widget.element.style.display = prev.display ?? "";
     delete widget.__hotHidden;
+
+    if (widget.__hotHiddenSlot) {
+      node.inputs.push(widget.__hotHiddenSlot);
+      delete widget.__hotHiddenSlot;
+    }
   }
 }
 
@@ -155,9 +173,13 @@ function sync(node) {
   // so re-using it later cannot resurrect the label of something removed.
   widgets.forEach((w, i) => {
     const wired = i < max && connected[i];
-    setHidden(w, !wired);
+    setHidden(node, w, !wired);
     if (!wired && w.value !== defaultName(i)) w.value = defaultName(i);
   });
+  // setHidden's splices only ever move name_i entries relative to each
+  // other, never past the input_i/index block, but reindex defensively
+  // anyway rather than depend on that invariant silently holding forever.
+  reindexLinks(node);
 
   const labels = [];
   for (let i = 0; i < max; i++) {
