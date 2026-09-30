@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/images/icon.png" width="120" alt="ComfyUI-HotSwitches icon">
+</p>
+
 # ComfyUI-HotSwitches
 
 I kept doing the same annoying thing in ComfyUI: wanting to try a different

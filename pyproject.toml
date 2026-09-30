@@ -17,4 +17,4 @@ Repository = "https://github.com/Bloodwolfb/ComfyUI-HotSwitches"
 [tool.comfy]
 PublisherId = "bloodwolfb"
 DisplayName = "HotSwitches"
-Icon = ""
+Icon = "https://raw.githubusercontent.com/Bloodwolfb/ComfyUI-HotSwitches/refs/heads/main/docs/images/icon.png"
