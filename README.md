@@ -62,6 +62,16 @@ git clone https://github.com/Bloodwolfb/ComfyUI-HotSwitches.git
 
 No extra Python dependencies required.
 
+## Example Workflow
+
+[`examples/hot_switches_demo.json`](examples/hot_switches_demo.json) has both
+nodes wired up and annotated with notes explaining what to do with them -
+drag it straight into ComfyUI (or Workflow -> Open) to see them working live.
+It uses plain Text nodes as stand-ins for whatever you'd actually switch
+between, so it opens and runs for anyone regardless of what models they have
+installed, and it shows Hot Lazy Switch both plain and promoted into a
+subgraph (the way it's meant to be used).
+
 ## Requirements
 
 Both nodes use ComfyUI's V3 node schema (`comfy_api.latest.io`), so they need

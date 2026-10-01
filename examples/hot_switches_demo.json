@@ -1,0 +1,789 @@
+{
+  "id": "3ab469ac-bea4-4fc6-ac08-8230f9c9a2a3",
+  "revision": 0,
+  "last_node_id": 18,
+  "last_link_id": 11,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "HotLazySwitch",
+      "pos": [
+        801.1748171158818,
+        2634.568985342585
+      ],
+      "size": [
+        270,
+        190
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Input 1",
+          "name": "input_0",
+          "shape": 7,
+          "type": "STRING",
+          "link": 1
+        },
+        {
+          "label": "Input 2",
+          "name": "input_1",
+          "shape": 7,
+          "type": "STRING",
+          "link": 2
+        },
+        {
+          "label": "Input 3",
+          "name": "input_2",
+          "shape": 7,
+          "type": "STRING",
+          "link": 3
+        },
+        {
+          "label": "Input 4",
+          "name": "input_3",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "HotLazySwitch",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Input 1",
+        "Input 1",
+        "Input 2",
+        "Input 3",
+        "Input 4",
+        "Input 5",
+        "Input 6",
+        "Input 7",
+        "Input 8",
+        "Input 9",
+        "Input 10"
+      ],
+      "widgets_values_named": {
+        "index": "Input 1",
+        "name_0": "Input 1",
+        "name_1": "Input 2",
+        "name_2": "Input 3",
+        "name_3": "Input 4",
+        "name_4": "Input 5",
+        "name_5": "Input 6",
+        "name_6": "Input 7",
+        "name_7": "Input 8",
+        "name_8": "Input 9",
+        "name_9": "Input 10"
+      }
+    },
+    {
+      "id": 2,
+      "type": "PrimitiveString",
+      "pos": [
+        355.2896262268923,
+        2518.9426330688007
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            1
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.37.0",
+        "Node name for S&R": "PrimitiveString",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        ""
+      ],
+      "widgets_values_named": {
+        "value": ""
+      }
+    },
+    {
+      "id": 3,
+      "type": "PrimitiveString",
+      "pos": [
+        355.2896262268923,
+        2654.13944396425
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            2
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.37.0",
+        "Node name for S&R": "PrimitiveString",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        ""
+      ],
+      "widgets_values_named": {
+        "value": ""
+      }
+    },
+    {
+      "id": 4,
+      "type": "PrimitiveString",
+      "pos": [
+        355.2896262268923,
+        2789.3362548596997
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            3
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.37.0",
+        "Node name for S&R": "PrimitiveString",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        ""
+      ],
+      "widgets_values_named": {
+        "value": ""
+      }
+    },
+    {
+      "id": 5,
+      "type": "Note",
+      "pos": [
+        -6.643275097954154,
+        2488.441196133554
+      ],
+      "size": [
+        344.49604136621093,
+        396.813603136613
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "This is Hot Lazy Switch: plug in up to 10 things, name them, and pick which one actually flows through the output from the index dropdown. Only the one you pick runs — everything else stays disconnected, so it doesn't even load.\n\nThe three Text nodes here are just stand-ins so this workflow opens and runs for anyone, no matter what models or images they've got installed. To use it for real:\n\nUnplug a Text node and wire in whatever you actually want to switch between.\nCheckpoints, LoRAs, images, prompts, conditioning, anything. \n\nFirst thing you connect decides the type for the whole node — all the slots you use need to match that type, since it's really one shared connection wearing different clothes.\n\nType something into the matching name_0 / name_1 / name_2 box so the index dropdown shows a real name instead of \"Input 1\", \"Input 2\".\n\nKeep plugging things in one at a time — a fresh empty socket shows up each time you fill the last one, up to 10 total.\n\nSet index to whichever name you want live right now.\n\nDelete this note once you're familiar with this mechanic."
+      ],
+      "widgets_values_named": {
+        "text": "This is Hot Lazy Switch: plug in up to 10 things, name them, and pick which one actually flows through the output from the index dropdown. Only the one you pick runs — everything else stays disconnected, so it doesn't even load.\n\nThe three Text nodes here are just stand-ins so this workflow opens and runs for anyone, no matter what models or images they've got installed. To use it for real:\n\nUnplug a Text node and wire in whatever you actually want to switch between.\nCheckpoints, LoRAs, images, prompts, conditioning, anything. \n\nFirst thing you connect decides the type for the whole node — all the slots you use need to match that type, since it's really one shared connection wearing different clothes.\n\nType something into the matching name_0 / name_1 / name_2 box so the index dropdown shows a real name instead of \"Input 1\", \"Input 2\".\n\nKeep plugging things in one at a time — a fresh empty socket shows up each time you fill the last one, up to 10 total.\n\nSet index to whichever name you want live right now.\n\nDelete this note once you're familiar with this mechanic."
+      },
+      "color": "#af3535",
+      "bgcolor": "rgba(24,24,27,.9)"
+    },
+    {
+      "id": 15,
+      "type": "a8250aff-084c-4739-b85d-98c966a82eb2",
+      "pos": [
+        801.1748171158818,
+        2970.9999789297262
+      ],
+      "size": [
+        270,
+        60.051041940490904
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Hot Lazy Switch (Subgraph)",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.37.0",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "previewExposures": []
+      },
+      "widgets_values": [
+        "Input 1"
+      ],
+      "widgets_values_named": {
+        "index": "Input 1"
+      }
+    },
+    {
+      "id": 16,
+      "type": "Note",
+      "pos": [
+        403.0080627910446,
+        2957.5811784065168
+      ],
+      "size": [
+        335,
+        103.31704303257948
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "This is the same thing, only contained in a subgraph and promoted. This is my favorite structure for this node."
+      ],
+      "widgets_values_named": {
+        "text": "This is the same thing, only contained in a subgraph and promoted. This is my favorite structure for this node."
+      },
+      "color": "#af3535",
+      "bgcolor": "rgba(24,24,27,.9)"
+    },
+    {
+      "id": 17,
+      "type": "HotResolutionModeSwitch",
+      "pos": [
+        801.1748171158818,
+        3177.4820144573587
+      ],
+      "size": [
+        279.5681399765067,
+        151.6886544258473
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "HotResolutionModeSwitch",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Resolution Selector",
+        "1:1 (Square)",
+        1,
+        8,
+        512,
+        512
+      ],
+      "widgets_values_named": {
+        "mode": "Resolution Selector",
+        "aspect_ratio": "1:1 (Square)",
+        "megapixels": 1,
+        "multiple": 8,
+        "width": 512,
+        "height": 512
+      }
+    },
+    {
+      "id": 18,
+      "type": "Note",
+      "pos": [
+        400.19381910195824,
+        3179.8644582409493
+      ],
+      "size": [
+        335,
+        128.900754118652
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "This is the Resolution Selector. Use the bucketed resolution for quick selection or change the mode to Manual Resolution to enter width and height directly.\nThis node requires no setup, just load it and go."
+      ],
+      "widgets_values_named": {
+        "text": "This is the Resolution Selector. Use the bucketed resolution for quick selection or change the mode to Manual Resolution to enter width and height directly.\nThis node requires no setup, just load it and go."
+      },
+      "color": "#af3535",
+      "bgcolor": "rgba(24,24,27,.9)"
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      1,
+      0,
+      "STRING"
+    ],
+    [
+      2,
+      3,
+      0,
+      1,
+      1,
+      "STRING"
+    ],
+    [
+      3,
+      4,
+      0,
+      1,
+      2,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "definitions": {
+    "subgraphs": [
+      {
+        "id": "a8250aff-084c-4739-b85d-98c966a82eb2",
+        "version": 1,
+        "state": {
+          "lastGroupId": 0,
+          "lastNodeId": 18,
+          "lastLinkId": 11,
+          "lastRerouteId": 0
+        },
+        "revision": 0,
+        "config": {},
+        "name": "Hot Lazy Switch (Subgraph)",
+        "inputNode": {
+          "id": -10,
+          "bounding": [
+            150.21736597158213,
+            3127.8208176044154,
+            128,
+            68
+          ]
+        },
+        "outputNode": {
+          "id": -20,
+          "bounding": [
+            1114.9391001502722,
+            3127.8208176044154,
+            128,
+            68
+          ]
+        },
+        "inputs": [
+          {
+            "id": "161262cd-caa5-4a21-9c91-ac1f9272cb40",
+            "name": "index",
+            "type": "COMBO",
+            "linkIds": [
+              10
+            ],
+            "pos": [
+              254.21736597158213,
+              3151.8208176044154
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "id": "0032b5fe-d2bd-48c8-a580-0d279f6d3806",
+            "name": "output",
+            "type": "STRING",
+            "linkIds": [
+              11
+            ],
+            "pos": [
+              1138.9391001502722,
+              3151.8208176044154
+            ]
+          }
+        ],
+        "widgets": [],
+        "nodes": [
+          {
+            "id": 13,
+            "type": "PrimitiveString",
+            "pos": [
+              338.2173659715821,
+              3273.017628499865
+            ],
+            "size": [
+              270,
+              58
+            ],
+            "flags": {},
+            "order": 0,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "localized_name": "STRING",
+                "name": "STRING",
+                "type": "STRING",
+                "links": [
+                  9
+                ]
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.37.0",
+              "Node name for S&R": "PrimitiveString",
+              "ue_properties": {
+                "widget_ue_connectable": {},
+                "input_ue_unconnectable": {},
+                "version": "7.8"
+              }
+            },
+            "widgets_values": [
+              ""
+            ],
+            "widgets_values_named": {
+              "value": ""
+            }
+          },
+          {
+            "id": 12,
+            "type": "PrimitiveString",
+            "pos": [
+              338.2173659715821,
+              3137.8208176044154
+            ],
+            "size": [
+              270,
+              58
+            ],
+            "flags": {},
+            "order": 1,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "localized_name": "STRING",
+                "name": "STRING",
+                "type": "STRING",
+                "links": [
+                  8
+                ]
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.37.0",
+              "Node name for S&R": "PrimitiveString",
+              "ue_properties": {
+                "widget_ue_connectable": {},
+                "input_ue_unconnectable": {},
+                "version": "7.8"
+              }
+            },
+            "widgets_values": [
+              ""
+            ],
+            "widgets_values_named": {
+              "value": ""
+            }
+          },
+          {
+            "id": 11,
+            "type": "PrimitiveString",
+            "pos": [
+              338.2173659715821,
+              3002.624006708966
+            ],
+            "size": [
+              270,
+              58
+            ],
+            "flags": {},
+            "order": 2,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "localized_name": "STRING",
+                "name": "STRING",
+                "type": "STRING",
+                "links": [
+                  7
+                ]
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.37.0",
+              "Node name for S&R": "PrimitiveString",
+              "ue_properties": {
+                "widget_ue_connectable": {},
+                "input_ue_unconnectable": {},
+                "version": "7.8"
+              }
+            },
+            "widgets_values": [
+              ""
+            ],
+            "widgets_values_named": {
+              "value": ""
+            }
+          },
+          {
+            "id": 14,
+            "type": "HotLazySwitch",
+            "pos": [
+              784.9391001502721,
+              3120.906025114018
+            ],
+            "size": [
+              270,
+              190
+            ],
+            "flags": {},
+            "order": 3,
+            "mode": 0,
+            "inputs": [
+              {
+                "label": "Input 1",
+                "localized_name": "Input 1",
+                "name": "input_0",
+                "shape": 7,
+                "type": "STRING",
+                "link": 7
+              },
+              {
+                "localized_name": "index",
+                "name": "index",
+                "type": "COMBO",
+                "widget": {
+                  "name": "index"
+                },
+                "link": 10
+              },
+              {
+                "label": "Input 2",
+                "localized_name": "Input 2",
+                "name": "input_1",
+                "shape": 7,
+                "type": "STRING",
+                "link": 8
+              },
+              {
+                "label": "Input 3",
+                "localized_name": "Input 3",
+                "name": "input_2",
+                "shape": 7,
+                "type": "STRING",
+                "link": 9
+              },
+              {
+                "label": "Input 4",
+                "localized_name": "Input 4",
+                "name": "input_3",
+                "shape": 7,
+                "type": "STRING",
+                "link": null
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "output",
+                "name": "output",
+                "type": "STRING",
+                "links": [
+                  11
+                ]
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "HotLazySwitch",
+              "ue_properties": {
+                "widget_ue_connectable": {},
+                "input_ue_unconnectable": {},
+                "version": "7.8"
+              }
+            },
+            "widgets_values": [
+              "Input 1",
+              "Input 1",
+              "Input 2",
+              "Input 3",
+              "Input 4",
+              "Input 5",
+              "Input 6",
+              "Input 7",
+              "Input 8",
+              "Input 9",
+              "Input 10"
+            ],
+            "widgets_values_named": {
+              "index": "Input 1",
+              "name_0": "Input 1",
+              "name_1": "Input 2",
+              "name_2": "Input 3",
+              "name_3": "Input 4",
+              "name_4": "Input 5",
+              "name_5": "Input 6",
+              "name_6": "Input 7",
+              "name_7": "Input 8",
+              "name_8": "Input 9",
+              "name_9": "Input 10"
+            }
+          }
+        ],
+        "groups": [],
+        "links": [
+          {
+            "id": 7,
+            "origin_id": 11,
+            "origin_slot": 0,
+            "target_id": 14,
+            "target_slot": 0,
+            "type": "STRING"
+          },
+          {
+            "id": 8,
+            "origin_id": 12,
+            "origin_slot": 0,
+            "target_id": 14,
+            "target_slot": 2,
+            "type": "STRING"
+          },
+          {
+            "id": 9,
+            "origin_id": 13,
+            "origin_slot": 0,
+            "target_id": 14,
+            "target_slot": 3,
+            "type": "STRING"
+          },
+          {
+            "id": 10,
+            "origin_id": -10,
+            "origin_slot": 0,
+            "target_id": 14,
+            "target_slot": 1,
+            "type": "COMBO"
+          },
+          {
+            "id": 11,
+            "origin_id": 14,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 0,
+            "type": "STRING"
+          }
+        ],
+        "extra": {
+          "ue_links": []
+        }
+      }
+    ]
+  },
+  "config": {},
+  "extra": {
+    "ue_links": [],
+    "ds": {
+      "scale": 1.0152559799477088,
+      "offset": [
+        253.84716521315406,
+        -2335.8106679459306
+      ]
+    },
+    "frontendVersion": "1.52.7",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}
