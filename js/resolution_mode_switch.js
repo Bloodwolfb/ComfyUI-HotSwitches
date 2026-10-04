@@ -22,6 +22,7 @@ import { app } from "../../scripts/app.js";
 const NODE_ID = "HotResolutionModeSwitch";
 const MODE_WIDGET = "mode";
 const MODE_BUCKETED = "Resolution Selector";
+const MODE_MANUAL = "Manual Resolution";
 const BUCKETED_WIDGETS = ["aspect_ratio", "megapixels", "multiple"];
 const MANUAL_WIDGETS = ["width", "height"];
 const HIDDEN_TYPE = "hidden";
@@ -61,12 +62,15 @@ function sync(node) {
     const modeWidget = node.widgets?.find((w) => w.name === MODE_WIDGET);
     if (!modeWidget) return;
 
-    const isBucketed = modeWidget.value === MODE_BUCKETED;
+    // From Image mode shows neither group - the image socket (never hidden,
+    // it's not a widget) is the only input that matters there.
+    const showBucketed = modeWidget.value === MODE_BUCKETED;
+    const showManual = modeWidget.value === MODE_MANUAL;
     for (const widget of node.widgets) {
         if (BUCKETED_WIDGETS.includes(widget.name)) {
-            setHidden(node, widget, !isBucketed);
+            setHidden(node, widget, !showBucketed);
         } else if (MANUAL_WIDGETS.includes(widget.name)) {
-            setHidden(node, widget, isBucketed);
+            setHidden(node, widget, !showManual);
         }
     }
 

@@ -37,16 +37,21 @@ subgraph input still shows real names to pick from instead of a bare number:
 <img src="docs/images/hot-resolution-mode-switch-selector.png" alt="Hot Resolution Mode Switch in Resolution Selector mode" width="400"> <img src="docs/images/hot-resolution-mode-switch-manual.png" alt="Hot Resolution Mode Switch in Manual Resolution mode" width="400">
 
 For when you want the convenience of an aspect-ratio + megapixel resolution
-picker most of the time, but still want to drop in exact numbers sometimes.
-One dropdown flips the node between:
+picker most of the time, but still want to drop in exact numbers sometimes -
+or just match the size of an image you already have. One dropdown flips the
+node between:
 
 - **Resolution Selector** - pick an aspect ratio and a target megapixel
   count, it does the math (same formula as ComfyUI's own built-in Resolution
   Selector node).
 - **Manual Resolution** - just type the width and height yourself.
+- **From Image** - plug an image into the `image` input and it outputs that
+  image's width and height. Saves you a separate Get Image Size node.
 
 Only the controls for whichever mode you're in are shown, so the node isn't
-cluttered with fields you're not using.
+cluttered with fields you're not using. The `image` input is lazy, too:
+whatever feeds it (a loader, a scaler, a whole chain) only runs when you're
+actually in From Image mode.
 
 ## Installation
 

@@ -1,7 +1,7 @@
 [project]
 name = "comfyui-hotswitches"
-description = "Two switch nodes for ComfyUI: pick from up to 10 named inputs of any type from one dropdown (only the picked one runs), and toggle a resolution node between an aspect-ratio/megapixel picker and manual width/height."
-version = "0.1.0"
+description = "Two switch nodes for ComfyUI: pick from up to 10 named inputs of any type from one dropdown (only the picked one runs), and toggle a resolution node between an aspect-ratio/megapixel picker, manual width/height, or reading the size of a connected image."
+version = "0.2.0"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {file = "LICENSE"}

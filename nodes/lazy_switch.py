@@ -135,7 +135,13 @@ class HotLazySwitch(io.ComfyNode):
     def check_lazy_status(cls, index=None, **kwargs) -> list[str]:
         i = cls._resolve(index, kwargs)
         key = slot_key(i)
-        return [] if kwargs.get(key) is not None else [key]
+        # A wired-but-unevaluated lazy input arrives as None; an unwired one
+        # is absent entirely. Requesting an unwired one makes the executor
+        # raise a NodeInputError before execute() can give its clearer
+        # "not connected" message, so only request it when it's wired.
+        if key in kwargs and kwargs[key] is None:
+            return [key]
+        return []
 
     @classmethod
     def execute(cls, index=None, **kwargs) -> io.NodeOutput:
