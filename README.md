@@ -96,6 +96,21 @@ subgraph (the way it's meant to be used).
 Both nodes use ComfyUI's V3 node schema (`comfy_api.latest.io`), so they need
 a reasonably current ComfyUI build that ships that API.
 
+## Publishing updates
+
+GitHub Actions publishes to the Comfy Registry when `pyproject.toml` changes
+on `main`. Add a new version number and matching notes in `CHANGELOG.md`
+in the same update. The Registry receives those patch notes with the package.
+
+One-time setup: create a publishing API key for the `bloodwolfb` publisher
+in [Comfy Registry](https://registry.comfy.org/) and save it as the GitHub
+repository secret `REGISTRY_ACCESS_TOKEN`.
+
+To publish an existing version, open **Actions -> Publish to Comfy Registry
+-> Run workflow**. Leave **Validate without publishing** unchecked to publish;
+check it to verify the setup without uploading a version. Registry versions
+cannot be reused, so increase the version number for each new release.
+
 ## License
 
 MIT - see [LICENSE](LICENSE). TLDR version: do whatever you want
