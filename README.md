@@ -23,6 +23,13 @@ dropdown. The unpicked branches don't just get ignored, they don't run at
 all, so you're not paying the load/compute cost for every option every time,
 only the one you're actually using.
 
+For model inputs, **Unload previous model** is on by default. Switch to a
+different model and the switch unloads its previous model before sampling.
+Keep generating with the same model and it leaves those weights loaded.
+It recognizes model inputs automatically; images, text, conditioning, and
+other inputs still pass through normally. You can turn the option off if
+you want ComfyUI to handle model retention as usual.
+
 Sockets show up one at a time as you connect them, so the node isn't a wall
 of ten empty inputs on day one. Unplug something and its socket stays put
 rather than shuffling everything below it around.
@@ -31,6 +38,9 @@ The selector is a dropdown rather than a raw index, so promoting it into a
 subgraph input still shows real names to pick from instead of a bare number:
 
 <img src="docs/images/hot-lazy-switch-subgraph.png" alt="The index selector promoted to a subgraph input, showing a filterable dropdown of real names" width="500">
+
+Custom labels stay in place when you refresh the page, reopen a workflow,
+or disconnect and reconnect a slot.
 
 ### Hot Resolution Mode Switch
 
@@ -66,6 +76,10 @@ git clone https://github.com/Bloodwolfb/ComfyUI-HotSwitches.git
 ```
 
 No extra Python dependencies required.
+
+After updating, restart ComfyUI and hard-refresh its page with **Ctrl+F5**
+to load the updated node and browser code. See [the patch notes](CHANGELOG.md)
+for what's changed.
 
 ## Example Workflow
 

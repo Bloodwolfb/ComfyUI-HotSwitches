@@ -1,6 +1,29 @@
+import weakref
+
+import comfy.model_management as model_management
+from comfy.model_patcher import ModelPatcher
+from comfy.patcher_extension import WrappersMP
 from comfy_api.latest import io
 
 MAX_SLOTS = 10
+_model_selections = weakref.WeakValueDictionary()
+
+
+class ModelSelection:
+    def __init__(self):
+        self.model_id = None
+
+    def prepare_sampling(self, executor, model, *args, **kwargs):
+        model_id = model.clone_base_uuid
+        if self.model_id is not None and self.model_id != model_id:
+            for loaded in model_management.loaded_models():
+                if loaded is not None and loaded.clone_base_uuid == self.model_id:
+                    model_management.unload_model_and_clones(
+                        loaded, unload_additional_models=False, all_devices=True,
+                    )
+                    break
+        self.model_id = model_id
+        return executor(model, *args, **kwargs)
 
 
 def default_name(i: int) -> str:
@@ -70,15 +93,26 @@ class HotLazySwitch(io.ComfyNode):
             for i in range(MAX_SLOTS)
         ]
 
+        inputs.append(
+            io.Boolean.Input(
+                "unload_previous_model", default=True, optional=True,
+                tooltip="For MODEL inputs, unload this switch's previous model "
+                        "before sampling a different one. Repeated runs of the "
+                        "same model keep its weights. Other input types are unaffected.",
+            )
+        )
+
         return io.Schema(
             node_id="HotLazySwitch",
             display_name="Hot Lazy Switch",
             category="HotComfy/Switches",
             description="Lazy switch with named, per-instance options that "
                         "survive subgraph promotion. Works with any type, and "
-                        "only the selected branch is executed.",
+                        "only the selected branch is executed. MODEL inputs can "
+                        "unload the previously used model when switching.",
             inputs=inputs,
             outputs=[io.MatchType.Output(template=match, display_name="output")],
+            hidden=[io.Hidden.unique_id],
         )
 
     # -- resolution ---------------------------------------------------------
@@ -144,7 +178,7 @@ class HotLazySwitch(io.ComfyNode):
         return []
 
     @classmethod
-    def execute(cls, index=None, **kwargs) -> io.NodeOutput:
+    def execute(cls, index=None, unload_previous_model=True, **kwargs) -> io.NodeOutput:
         i = cls._resolve(index, kwargs)
         label = cls._labels(kwargs)[i]
         value = kwargs.get(slot_key(i))
@@ -154,6 +188,22 @@ class HotLazySwitch(io.ComfyNode):
             raise ValueError(
                 f"Hot Lazy Switch: selected '{label}' ({slot_key(i)}) is not "
                 f"connected. Connected slots: {', '.join(connected)}."
+            )
+
+        if unload_previous_model and isinstance(value, ModelPatcher):
+            unique_id = cls.hidden.unique_id
+            selection = _model_selections.get(unique_id)
+            if selection is None:
+                selection = ModelSelection()
+                _model_selections[unique_id] = selection
+
+            # Sampling wrappers survive cached outputs and downstream clones.
+            # The shared state holds only a UUID, never model weights.
+            value = value.clone()
+            key = f"hot_lazy_switch:{unique_id}"
+            value.remove_wrappers_with_key(WrappersMP.PREPARE_SAMPLING, key)
+            value.add_wrapper_with_key(
+                WrappersMP.PREPARE_SAMPLING, key, selection.prepare_sampling,
             )
 
         return io.NodeOutput(value)

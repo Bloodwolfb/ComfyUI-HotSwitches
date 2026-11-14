@@ -147,6 +147,8 @@ function labelFor(widget, i) {
 }
 
 function sync(node) {
+  if (app.configuringGraph) return;
+
   const combo = (node.widgets ?? []).find((w) => w.name === SELECTOR);
   if (!combo) return;
 
@@ -169,12 +171,11 @@ function sync(node) {
   // visible and reusable rather than closing up under the user.
   setVisibleSockets(node, Math.min(Math.max(last + 2, 1), max));
 
-  // A name box belongs to a live connection. An unused slot carries no name,
-  // so re-using it later cannot resurrect the label of something removed.
+  // Links are temporarily absent during graph restoration. Keep slot names
+  // even while disconnected so loading or rewiring cannot erase saved labels.
   widgets.forEach((w, i) => {
     const wired = i < max && connected[i];
     setHidden(node, w, !wired);
-    if (!wired && w.value !== defaultName(i)) w.value = defaultName(i);
   });
   // setHidden's splices only ever move name_i entries relative to each
   // other, never past the input_i/index block, but reindex defensively
@@ -258,7 +259,7 @@ app.registerExtension({
       const result = onConfigure?.apply(this, args);
       const node = this;
       hookNameWidgets(node);
-      sync(node);
+      requestAnimationFrame(() => sync(node));
       return result;
     };
 
