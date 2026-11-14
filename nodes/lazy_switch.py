@@ -1,12 +1,11 @@
-import weakref
-
 import comfy.model_management as model_management
 from comfy.model_patcher import ModelPatcher
 from comfy.patcher_extension import WrappersMP
 from comfy_api.latest import io
 
 MAX_SLOTS = 10
-_model_selections = weakref.WeakValueDictionary()
+# Keep UUID-only state after ComfyUI evicts the switch's cached outputs.
+_model_selections = {}
 
 
 class ModelSelection:

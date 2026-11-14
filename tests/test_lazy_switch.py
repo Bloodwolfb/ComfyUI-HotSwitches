@@ -108,6 +108,18 @@ class HotSwitchTests(unittest.TestCase):
         self.sample(self.select(a.clone()))
         self.assertEqual(self.unloaded, [])
 
+    def test_previous_weights_are_unloaded_after_cached_outputs_are_evicted(self):
+        a, b = self.model(), self.model()
+        out_a = self.select(a)
+        self.sample(out_a)
+        # ComfyUI can evict switch/patch outputs while the loader still owns
+        # the same resident weights and the loaded-model entry falls back to it.
+        self.resident[:] = [a]
+        del out_a
+        gc.collect()
+        self.sample(self.select(b))
+        self.assertEqual(self.unloaded, [a.clone_base_uuid])
+
     def test_new_model_in_same_slot_is_recognized(self):
         a, replacement = self.model(), self.model()
         self.sample(self.select(a))
@@ -156,16 +168,21 @@ class HotSwitchTests(unittest.TestCase):
         wrapped_twice = self.select(out_a)
         self.assertEqual(len(wrapped_twice.get_all_wrappers(WrappersMP.PREPARE_SAMPLING)), 1)
 
-    def test_bookkeeping_does_not_keep_models_alive(self):
+    def test_bookkeeping_keeps_identity_without_keeping_models_alive(self):
         a = self.model()
         out = self.select(a)
+        self.sample(out)
         ref = weakref.ref(out)
+        source_ref = weakref.ref(a)
         state_ref = weakref.ref(switch._model_selections["switch-a"])
-        del out
+        model_id = a.clone_base_uuid
+        self.resident.clear()
+        del out, a
         gc.collect()
         self.assertIsNone(ref())
-        self.assertIsNone(state_ref())
-        self.assertEqual(len(switch._model_selections), 0)
+        self.assertIsNone(source_ref())
+        self.assertIsNotNone(state_ref())
+        self.assertEqual(state_ref().model_id, model_id)
 
     def test_lazy_schema_and_old_widget_positions_are_preserved(self):
         schema = switch.HotLazySwitch.GET_SCHEMA()

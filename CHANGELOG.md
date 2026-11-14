@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.3.1 — November 14, 2026
+
+### Model unloading now survives ComfyUI clearing its cache
+
+Fixed a gap in 0.3.0 where the switch could forget which model it last used
+when ComfyUI discarded cached node outputs. The old model's weights could
+still be in VRAM, so switching models would leave them behind again.
+
+The switch now keeps that small piece of bookkeeping independently of the
+output cache. It still unloads only the previous model when the selected
+model changes, and repeated runs with the same model keep its weights.
+The bookkeeping itself does not keep model objects or weights alive.
+
+This fix was checked with real GPU allocations and a sequence of BF16 and
+NVFP4 Qwen generations, including repeat runs and switching back.
+Restart ComfyUI after updating to activate it.
+
 ## 0.3.0 — November 14, 2026
 
 ### Switching models without leaving the previous weights behind
