@@ -8,10 +8,8 @@ import { app } from "../../scripts/app.js";
 // box for each connected slot, and rebuilds the combo options from those
 // names.
 //
-// Because slots are static they NEVER renumber. input_2 is always input_2, so
-// name_i stays bound to input_i for the life of the node. Pulling a wire leaves
-// a visible empty socket rather than compacting - which is why there is no
-// link-identity tracking or name reconciliation here.
+// Slot names stay fixed: name_i always labels input_i. Array positions can
+// change when unused rows are removed, so let LiteGraph preserve the links.
 
 const NODE_ID = "HotLazySwitch";
 const SELECTOR = "index";
@@ -51,19 +49,6 @@ function allSlots(node) {
   return node.__hotSlots;
 }
 
-// litegraph stores a link's target as an index into node.inputs, so any splice
-// invalidates the links after it.
-function reindexLinks(node) {
-  const links = node.graph?.links;
-  if (!links) return;
-  (node.inputs ?? []).forEach((slot, idx) => {
-    if (slot.link != null) {
-      const link = links[slot.link];
-      if (link) link.target_slot = idx;
-    }
-  });
-}
-
 function setVisibleSockets(node, visible) {
   const stash = allSlots(node);
   if (!stash) return;
@@ -74,26 +59,20 @@ function setVisibleSockets(node, visible) {
   // trailing rows go - which also means no link is ever destroyed here.
   for (let i = stash.length - 1; i >= visible; i--) {
     const idx = (node.inputs ?? []).findIndex((s) => slotIndex(s.name) === i);
-    if (idx >= 0 && node.inputs[idx].link == null) {
-      node.inputs.splice(idx, 1);
+    if (idx >= 0 && !node.isInputConnected(idx)) {
+      node.removeInput(idx);
       changed = true;
     }
   }
 
-  // Restore any missing slot, spliced in after the highest lower-numbered slot
-  // so socket order stays 0,1,2... rather than appending below the widgets.
+  // Append restored sockets so existing targets never move. Widget inputs
+  // occupy their widget rows, so this still renders data sockets in order.
   for (let i = 0; i < visible; i++) {
     if ((node.inputs ?? []).some((s) => slotIndex(s.name) === i)) continue;
-    let insertAt = 0;
-    node.inputs.forEach((s, j) => {
-      const si = slotIndex(s.name);
-      if (si !== null && si < i) insertAt = j + 1;
-    });
-    node.inputs.splice(insertAt, 0, stash[i]);
+    node.inputs.push(stash[i]);
     changed = true;
   }
 
-  if (changed) reindexLinks(node);
   return changed;
 }
 
@@ -108,6 +87,10 @@ function setVisibleSockets(node, visible) {
 // visible row, sometimes floating below the node entirely). Splicing it out
 // of node.inputs while hidden, and back in on show, closes that off.
 function setHidden(node, widget, hidden) {
+  const inputIndex = (node.inputs ?? []).findIndex((s) => s.name === widget.name);
+  // A promoted or converted label must keep both its wire and its visible row.
+  if (hidden && inputIndex >= 0 && node.isInputConnected(inputIndex)) hidden = false;
+
   if (hidden) {
     if (widget.__hotHidden) return;
     widget.__hotHidden = {
@@ -124,7 +107,7 @@ function setHidden(node, widget, hidden) {
     const idx = (node.inputs ?? []).findIndex((s) => s.name === widget.name);
     if (idx >= 0) {
       widget.__hotHiddenSlot = node.inputs[idx];
-      node.inputs.splice(idx, 1);
+      node.removeInput(idx);
     }
   } else if (widget.__hotHidden) {
     const prev = widget.__hotHidden;
@@ -161,7 +144,8 @@ function sync(node) {
   const connected = [];
   let last = -1;
   for (let i = 0; i < max; i++) {
-    const wired = findSlot(node, i)?.link != null;
+    const index = (node.inputs ?? []).findIndex((s) => slotIndex(s.name) === i);
+    const wired = index >= 0 && node.isInputConnected(index);
     connected.push(wired);
     if (wired) last = i;
   }
@@ -177,10 +161,6 @@ function sync(node) {
     const wired = i < max && connected[i];
     setHidden(node, w, !wired);
   });
-  // setHidden's splices only ever move name_i entries relative to each
-  // other, never past the input_i/index block, but reindex defensively
-  // anyway rather than depend on that invariant silently holding forever.
-  reindexLinks(node);
 
   const labels = [];
   for (let i = 0; i < max; i++) {

@@ -51,8 +51,8 @@ picker most of the time, but still want to drop in exact numbers sometimes -
 or just match the size of an image you already have. One dropdown flips the
 node between:
 
-- **Resolution Selector** - pick an aspect ratio and a target megapixel
-  count, it does the math (same formula as ComfyUI's own built-in Resolution
+- **Resolution Selector** - pick an aspect ratio and a target up to 150
+  megapixels, it does the math (same formula as ComfyUI's own built-in Resolution
   Selector node).
 - **Manual Resolution** - just type the width and height yourself.
 - **From Image** - plug an image into the `image` input and it outputs that

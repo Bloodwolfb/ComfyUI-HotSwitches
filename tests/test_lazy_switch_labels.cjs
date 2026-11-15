@@ -43,6 +43,13 @@ async function harness() {
     computeSize() { return [300, 200]; }
     setSize(size) { this.size = size; }
     setDirtyCanvas() {}
+    isInputConnected(index) { return this.inputs[index]?.link != null; }
+    removeInput(index) {
+      this.inputs.splice(index, 1);
+      for (const link of Object.values(this.graph.links)) {
+        if (link.target_slot > index) link.target_slot--;
+      }
+    }
   }
   await extension.beforeRegisterNodeDef(Node, { name: 'HotLazySwitch' });
   return {

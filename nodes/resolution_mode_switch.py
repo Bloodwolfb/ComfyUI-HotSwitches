@@ -61,7 +61,7 @@ class HotResolutionModeSwitch(io.ComfyNode):
                     "megapixels",
                     default=1.0,
                     min=0.1,
-                    max=16.0,
+                    max=150.0,
                     step=0.1,
                     tooltip="Target total megapixels. 1.0 MP ≈ 1024x1024 for square.",
                 ),

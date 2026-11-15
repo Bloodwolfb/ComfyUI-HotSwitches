@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.3.2 — November 14, 2026
+
+### Hot Lazy Switch: plugs stay where you put them
+
+Some Hot Lazy Switch connections were suddenly jumping to **Input 4**,
+including model, CLIP, and VAE selectors connected through a subgraph. That
+could leave the switch using a different selection from the one you expected.
+
+This happened when the switch added or hid unused inputs. Those layout
+changes could shift an existing wire onto another socket. Connections now
+stay attached to the right inputs as the node grows or shrinks, and your
+custom labels and selected option stay intact too.
+
+### Hot Resolution Mode Switch: up to 150 MP
+
+The **Resolution Selector** mode now goes up to **150 MP**, increased from
+16 MP. Your existing settings keep producing the same dimensions, with the
+same aspect ratios and rounding.
+
+Higher targets still need to fit the limits of the nodes using those
+dimensions. At 150 MP with the default multiple of 8, 16:9 produces
+16720 × 9408 and 21:9 produces 19160 × 8208, so both exceed 16384 pixels
+on the long side. The same applies to 9:16 on its tall side.
+
+### After updating
+
+Restart ComfyUI, then hard-refresh the page with **Ctrl+F5**. If a selector
+wire already moved in a saved workflow, reconnect it to **index** once and
+save the workflow again.
+
 ## 0.3.1 — November 14, 2026
 
 ### Model unloading now survives ComfyUI clearing its cache
